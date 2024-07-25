@@ -3,7 +3,7 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 import io.qameta.allure.Step;
 
-public class UserMethods extends Constants {
+public class UserMethods extends ConstantsData {
 
     @Step("Создать пользователя")
     public Response create(User user){
@@ -24,11 +24,11 @@ public class UserMethods extends Constants {
     }
 
     @Step("Получение информации о пользователе с токеном")
-    public Response getInfoWithToken(String token){
+    public Response getInfoWithToken(String accessToken){
         return given()
                 .baseUri(BASE_URL)
                 .header("Content-type", "application/json")
-                .header("Authorization", token)
+                .header("Authorization", accessToken)
                 .get("/api/auth/user");
     }
 
@@ -41,11 +41,11 @@ public class UserMethods extends Constants {
     }
 
     @Step("Изменение данных пользователя с токеном")
-    public Response changeInfoWithToken(User user, String token){
+    public Response changeInfoWithToken(User user, String accessToken){
         return given()
                 .baseUri(BASE_URL)
                 .header("Content-type", "application/json")
-                .header("Authorization", token)
+                .header("Authorization", accessToken)
                 .body(user)
                 .patch("/api/auth/user");
     }
@@ -59,11 +59,11 @@ public class UserMethods extends Constants {
     }
 
     @Step("Получение заказов пользователя с токеном")
-    public Response getOrderListWithToken(String token) {
+    public Response getOrderListWithToken(String accessToken) {
         return given()
                 .baseUri(BASE_URL)
                 .header("Content-type", "application/json")
-                .header("Authorization", token)
+                .header("Authorization", accessToken)
                 .get("/api/orders");
     }
 
@@ -76,11 +76,11 @@ public class UserMethods extends Constants {
     }
 
     @Step("Удаление пользователя по токену")
-    public Response delete(String token) {
+    public Response delete(String accessToken) {
         return given()
                 .baseUri(BASE_URL)
                 .header("Content-type", "application/json")
-                .header("Authorization", token)
+                .header("Authorization", accessToken)
                 .delete("/api/auth/user");
     }
 

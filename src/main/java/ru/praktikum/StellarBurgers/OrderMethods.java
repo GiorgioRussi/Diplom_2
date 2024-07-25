@@ -3,14 +3,14 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 import io.qameta.allure.Step;
 
-public class OrderMethods extends Constants {
+public class OrderMethods extends ConstantsData {
 
     @Step("Создание заказа с токеном")
-    public Response createWithToken(Order order, String token) {
+    public Response createWithToken(Order order, String accessToken) {
         return given()
                 .baseUri(BASE_URL)
                 .header("Content-type", "application/json")
-                .header("Authorization", token)
+                .header("Authorization", accessToken)
                 .body(order)
                 .post("/api/orders");
     }
