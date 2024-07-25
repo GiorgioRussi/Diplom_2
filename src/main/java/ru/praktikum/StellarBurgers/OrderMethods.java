@@ -25,7 +25,7 @@ public class OrderMethods extends Constants {
 
     }
 
-    @Step("Получение списка ингридиентов")
+    @Step("Получение списка ингредиентов")
     public Response getIngredientList() {
         return given()
                 .baseUri(BASE_URL)
