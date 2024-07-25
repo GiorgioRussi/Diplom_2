@@ -75,4 +75,13 @@ public class UserMethods extends Constants {
                 .get("/api/orders");
     }
 
+    @Step("Удаление пользователя по токену")
+    public Response delete(String token) {
+        return given()
+                .baseUri(BASE_URL)
+                .header("Content-type", "application/json")
+                .header("Authorization", token)
+                .delete("/api/auth/user");
+    }
+
 }
