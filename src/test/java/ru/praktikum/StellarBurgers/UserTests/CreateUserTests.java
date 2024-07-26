@@ -11,6 +11,7 @@ import ru.praktikum.StellarBurgers.UserMethods;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+@DisplayName("POST /api/auth/register : Регистрация пользователя")
 public class CreateUserTests extends ConstantsData {
 
     UserMethods userMethods;
@@ -21,8 +22,8 @@ public class CreateUserTests extends ConstantsData {
         userMethods = new UserMethods();
     }
 
-    @DisplayName("Создать уникального пользователя")
     @Test
+    @DisplayName("Создать уникального пользователя")
     public void shouldCreateUser(){
         Response response = userMethods.create(user);
         response.then()
@@ -40,8 +41,8 @@ public class CreateUserTests extends ConstantsData {
         accessToken = response.path("accessToken").toString();
     }
 
-    @DisplayName("Создать пользователя, который уже зарегистрирован")
     @Test
+    @DisplayName("Создать пользователя, который уже зарегистрирован")
     public void shouldntCreateAlreadyExistUser(){
         Response response = userMethods.create(user);
         accessToken = response.path("accessToken").toString();

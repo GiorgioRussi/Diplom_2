@@ -11,6 +11,7 @@ import ru.praktikum.StellarBurgers.UserMethods;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
+@DisplayName("PATCH /api/auth/user : Изменение данных пользователя")
 public class ChangeUserData extends ConstantsData {
 
     UserMethods userMethods;
@@ -22,8 +23,8 @@ public class ChangeUserData extends ConstantsData {
         accessToken = userMethods.create(user).path("accessToken").toString();
     }
 
-    @DisplayName("Изменение email пользователя (с авторизацией)")
     @Test
+    @DisplayName("Изменение email пользователя (с авторизацией)")
     public void shouldUpdateUserEmail(){
         userMethods.login(UserLogin.fromUser(user));
         user.setEmail(faker.internet().emailAddress());
@@ -38,8 +39,8 @@ public class ChangeUserData extends ConstantsData {
                 .body("user.name", equalTo(user.getName()));
     }
 
-    @DisplayName("Изменение password пользователя (с авторизацией)")
     @Test
+    @DisplayName("Изменение password пользователя (с авторизацией)")
     public void shouldUpdateUserPassword(){
         userMethods.login(UserLogin.fromUser(user));
         user.setEmail(faker.internet().password());
@@ -54,8 +55,8 @@ public class ChangeUserData extends ConstantsData {
                 .body("user.name", equalTo(user.getName()));
     }
 
-    @DisplayName("Изменение name пользователя (с авторизацией)")
     @Test
+    @DisplayName("Изменение name пользователя (с авторизацией)")
     public void shouldUpdateUserName(){
         userMethods.login(UserLogin.fromUser(user));
         user.setEmail(faker.name().username());
@@ -70,8 +71,8 @@ public class ChangeUserData extends ConstantsData {
                 .body("user.name", equalTo(user.getName()));
     }
 
-    @DisplayName("Изменение email пользователя (без авторизации)")
     @Test
+    @DisplayName("Изменение email пользователя (без авторизации)")
     public void shouldntUpdateUserEmailWithoutToken(){
         user.setEmail(faker.internet().emailAddress());
         String expectedMessage = "You should be authorised";
@@ -85,8 +86,8 @@ public class ChangeUserData extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Изменение password пользователя (без авторизации)")
     @Test
+    @DisplayName("Изменение password пользователя (без авторизации)")
     public void shouldntUpdateUserPasswordWithoutToken(){
         user.setPassword(faker.internet().password());
         String expectedMessage = "You should be authorised";
@@ -100,8 +101,8 @@ public class ChangeUserData extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Изменение name пользователя (без авторизации)")
     @Test
+    @DisplayName("Изменение name пользователя (без авторизации)")
     public void shouldntUpdateUserNameWithoutToken(){
         user.setName(faker.name().username());
         String expectedMessage = "You should be authorised";

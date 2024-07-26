@@ -16,6 +16,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+@DisplayName("POST /api/orders : Создание заказа")
 public class CreateOrderTests extends ConstantsData {
 
     OrderMethods orderMethods;
@@ -33,8 +34,8 @@ public class CreateOrderTests extends ConstantsData {
         accessToken = userMethods.create(user).path("accessToken").toString();
     }
 
-    @DisplayName("Создание заказа: с авторизацией, с верным хешем ингредиентов")
     @Test
+    @DisplayName("Создание заказа: с авторизацией, с верным хешем ингредиентов")
     public void shouldCreateOrderValidIngredientsWithToken(){
         Response response = orderMethods.getIngredientList();
         ingredientsHash = response.then().extract().jsonPath().getList("data._id");
@@ -58,8 +59,8 @@ public class CreateOrderTests extends ConstantsData {
                 .body("order.status", notNullValue());
     }
 
-    @DisplayName("Создание заказа: без авторизации, с верным хешем ингредиентов")
     @Test
+    @DisplayName("Создание заказа: без авторизации, с верным хешем ингредиентов")
     public void shouldCreateOrderValidIngredientsWithoutToken(){
         Response response = orderMethods.getIngredientList();
         ingredientsHash = response.then().extract().jsonPath().getList("data._id");
@@ -77,8 +78,8 @@ public class CreateOrderTests extends ConstantsData {
                 .body("order.number", notNullValue());
     }
 
-    @DisplayName("Создание заказа: c авторизацией, без ингредиентов")
     @Test
+    @DisplayName("Создание заказа: c авторизацией, без ингредиентов")
     public void shouldntCreateOrderNoIngredientsWithToken(){
         order.setIngredients(ingredients);
         Response response = orderMethods.createWithToken(order, accessToken);
@@ -92,8 +93,8 @@ public class CreateOrderTests extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Создание заказа: без авторизации, без ингредиентов")
     @Test
+    @DisplayName("Создание заказа: без авторизации, без ингредиентов")
     public void shouldntCreateOrderNoIngredientsWithoutToken(){
         order.setIngredients(ingredients);
         Response response = orderMethods.createWithoutToken(order);
@@ -105,8 +106,8 @@ public class CreateOrderTests extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Создание заказа: c авторизацией, неверный хеш ингредиентов")
     @Test
+    @DisplayName("Создание заказа: c авторизацией, неверный хеш ингредиентов")
     public void shouldntCreateOrderIncorrectIngredientsWithToken(){
         ingredients.add(INCORRECT_HASHCODE);
         order.setIngredients(ingredients);
@@ -114,8 +115,8 @@ public class CreateOrderTests extends ConstantsData {
                 .statusCode(500);
     }
 
-    @DisplayName("Создание заказа: без авторизации, неверный хеш ингредиентов")
     @Test
+    @DisplayName("Создание заказа: без авторизации, неверный хеш ингредиентов")
     public void shouldntCreateOrderIncorrectIngredientsWithoutToken(){
         ingredients.add(INCORRECT_HASHCODE);
         order.setIngredients(ingredients);

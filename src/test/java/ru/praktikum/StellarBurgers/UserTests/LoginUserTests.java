@@ -12,6 +12,7 @@ import ru.praktikum.StellarBurgers.UserMethods;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+@DisplayName("POST /api/auth/login : Авторизация пользователя")
 public class LoginUserTests extends ConstantsData {
 
     UserMethods userMethods;
@@ -23,8 +24,8 @@ public class LoginUserTests extends ConstantsData {
         accessToken = userMethods.create(user).path("accessToken").toString();
     }
 
-    @DisplayName("Логин под существующим пользователем")
     @Test
+    @DisplayName("Логин под существующим пользователем")
     public void shouldSuccessLoginUser(){
         Response response = userMethods.login(UserLogin.fromUser(user));
         response.then()
@@ -41,8 +42,8 @@ public class LoginUserTests extends ConstantsData {
                 .body("user.name", equalTo(user.getName()));
     }
 
-    @DisplayName("Логин с пустым email")
     @Test
+    @DisplayName("Логин с пустым email")
     public void shouldntSuccessLoginUserWithoutEmail(){
         user.setEmail(null);
         Response response = userMethods.login(UserLogin.fromUser(user));
@@ -56,8 +57,8 @@ public class LoginUserTests extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Логин с пустым password")
     @Test
+    @DisplayName("Логин с пустым password")
     public void shouldntSuccessLoginUserWithoutPassword(){
             user.setPassword(null);
             Response response = userMethods.login(UserLogin.fromUser(user));
@@ -71,8 +72,8 @@ public class LoginUserTests extends ConstantsData {
                     .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Логин с неверным email")
     @Test
+    @DisplayName("Логин с неверным email")
     public void shouldntSuccessLoginUserWithIncorrectEmail(){
         user.setEmail(faker.internet().emailAddress());
         Response response = userMethods.login(UserLogin.fromUser(user));
@@ -86,8 +87,8 @@ public class LoginUserTests extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-    @DisplayName("Логин с неверным password")
     @Test
+    @DisplayName("Логин с неверным password")
     public void shouldntSuccessLoginUserWithIncorrectPassword(){
         user.setPassword(faker.internet().password());
         Response response = userMethods.login(UserLogin.fromUser(user));

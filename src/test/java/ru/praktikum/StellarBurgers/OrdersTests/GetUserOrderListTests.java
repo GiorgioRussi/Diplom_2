@@ -13,6 +13,8 @@ import ru.praktikum.StellarBurgers.UserMethods;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
+
+@DisplayName("GET /api/orders : Получение списка заказов пользователя")
 public class GetUserOrderListTests extends ConstantsData {
 
     UserMethods userMethods;
@@ -26,8 +28,8 @@ public class GetUserOrderListTests extends ConstantsData {
         accessToken = userMethods.create(user).path("accessToken").toString();
     }
 
-    @DisplayName("Получение заказов авторизованного пользователя")
     @Test
+    @DisplayName("Получение заказов авторизованного пользователя")
     public void shouldGetUserOrderListWithToken(){
         userMethods.login(UserLogin.fromUser(user));
         Response response = userMethods.getOrderListWithToken(accessToken);
@@ -43,8 +45,8 @@ public class GetUserOrderListTests extends ConstantsData {
                 .body("totalToday", notNullValue());
     }
 
-    @DisplayName("Получение заказов неавторизованного пользователя")
     @Test
+    @DisplayName("Получение заказов неавторизованного пользователя")
     public void shouldGetUserOrderListWithoutToken(){
         String expectedMessage = "You should be authorised";
         Response response = userMethods.getOrderListWithoutToken();
