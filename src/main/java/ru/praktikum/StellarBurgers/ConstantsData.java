@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class ConstantsData {
 
-    Faker faker = new Faker();
+    public Faker faker = new Faker();
 
     String email = faker.internet().emailAddress();
     String password = faker.internet().password();

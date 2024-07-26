@@ -15,11 +15,11 @@ public class UserMethods extends ConstantsData {
     }
 
     @Step("Логин пользователя")
-    public Response login(User user){
+    public Response login(UserLogin userLogin){
         return given()
                 .baseUri(BASE_URL)
                 .header("Content-type", "application/json")
-                .body(user)
+                .body(userLogin)
                 .post("/api/auth/login");
     }
 

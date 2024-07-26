@@ -100,24 +100,6 @@ public class CreateUserTests extends ConstantsData {
                 .body("message", equalTo(expectedMessage));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @After
     public void cleanUp() {
         if (accessToken != null) {
